@@ -12,8 +12,8 @@ public:
     Keeper();
     ~Keeper();
 
-    void Add(Base* obj); // владеет obj
-    void Delete(int index); // удаляет объект и сдвигает
+    void Add(Base* obj); 
+    void Delete(int index);
     void ShowAll() const;
     void Edit(int index);
 

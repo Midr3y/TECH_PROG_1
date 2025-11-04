@@ -3,11 +3,17 @@
 #include <fstream>
 #include <cstring>
 #include "MyException.h"
+#include <limits>
 
 // Вспомогательные функции для работы со C-строками и бинарным вводом/выводом
 inline char* ReadLineAlloc() {
     const int BUF = 1024;
     char buffer[BUF];
+
+    if (std::cin.peek() == '\n') {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
     if (!std::cin.getline(buffer, BUF)) {
         // если предыдущий ввод оставил символ \n
         std::cin.clear();

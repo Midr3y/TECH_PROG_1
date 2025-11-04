@@ -2,6 +2,7 @@
 #include "Utils.h"
 #include <iostream>
 
+
 Percussion::Percussion()
     : type(nullptr), name(nullptr), cost(0.0), count(0), owner(nullptr)
 {
@@ -55,7 +56,7 @@ void Percussion::SetOwner(const char* o) {
 
 void Percussion::Show() const {
     std::cout << "[Ударный] Тип: " << type << ", Название: " << name
-              << ", Стоимость: " << cost << ", Кол-во: " << count
+              << ", Стоимость(РУБ): " << cost << ", Кол-во: " << count
               << ", Владелец: " << owner << "\n";
 }
 
@@ -63,9 +64,18 @@ void Percussion::Edit() {
     std::cout << "Ввод данных для ударного инструмента:\n";
     std::cout << "Тип: "; char* t = ReadLineAlloc(); SetType(t); delete[] t;
     std::cout << "Название: "; char* n = ReadLineAlloc(); SetName(n); delete[] n;
-    std::cout << "Стоимость: "; double c; if(!(std::cin >> c)) throw MyException("Неверный ввод стоимости"); SetCost(c);
-    std::cout << "Кол-во: "; int cnt; if(!(std::cin >> cnt)) throw MyException("Неверный ввод количества"); SetCount(cnt);
-    std::cin.ignore();
+    std::cout << "Стоимость(РУБ): "; double c; 
+        if(!(std::cin >> c)) 
+            throw MyException("Неверный ввод стоимости"); 
+            SetCost(c);
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Кол-во: "; int cnt; 
+        if(!(std::cin >> cnt)) 
+            throw MyException("Неверный ввод количества"); 
+            SetCount(cnt);
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "ФИО владельца: "; char* o = ReadLineAlloc(); SetOwner(o); delete[] o;
 }
 
